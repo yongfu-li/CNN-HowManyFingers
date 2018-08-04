@@ -6,8 +6,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import copy
 import cv2
-import os
 
+import os;
+os.environ['TF_CPP_MIN_LOG_LEVEL']='1';
+import warnings;
+warnings.filterwarnings("ignore");
 
 dataColor = (0,255,0)
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -43,8 +46,7 @@ def main():
     global showMask
 
     model = load_model('model_6cat.h5')
-
-    x0, y0, width = 200, 220, 300
+    x0, y0, width = 200, 180, 300
 
     cam = cv2.VideoCapture(0)
     cv2.namedWindow('Original', cv2.WINDOW_NORMAL)
@@ -55,7 +57,6 @@ def main():
         frame = cv2.flip(frame, 1) # mirror
         window = copy.deepcopy(frame)
         cv2.rectangle(window, (x0,y0), (x0+width-1,y0+width-1), dataColor, 12)
-
         # draw text
         if takingData:
             dataColor = (0,250,0)
